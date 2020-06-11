@@ -327,12 +327,12 @@ $db->db_connection->query('ALTER TABLE `website`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;');
 
 for ($i = 0; $i < 40; $i++) {
-    $fakeName = $faker->name;
+    $fakeFirstName = $faker->firstName();
     $fakeAddress = $faker->address;
     $fakeEmail = $faker->email;
     $stmt = $db->db_connection->prepare("INSERT INTO user (`f_name`, `l_name`, `email`, `password`, `lang_id`)
      VALUE (?, ?, ?, ?, ?)");
-    $stmt->execute([$fakeName, $fakeName, $fakeEmail, password_hash("secret", PASSWORD_DEFAULT), 1]);
+    $stmt->execute([$fakeFirstName, $faker->lastName, $fakeEmail, password_hash("secret", PASSWORD_DEFAULT), 1]);
 }
 for ($i = 0; $i < 40; $i++) {
     $roleId = rand(2, 4);
