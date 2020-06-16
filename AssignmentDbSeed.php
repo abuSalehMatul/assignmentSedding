@@ -211,6 +211,7 @@ $db->db_connection->query('CREATE TABLE `user` (
     `address` text DEFAULT NULL,
     `phone_number` varchar(255) DEFAULT NULL,
     `last_login` varchar(255) DEFAULT NULL,
+    `token` varchar(255) DEFAULT NULL,
     `lang_id` int(11) DEFAULT NULL,
     `role` varchar(255) DEFAULT NULL,
     `created_at` date NOT NULL DEFAULT current_timestamp(),
@@ -287,6 +288,8 @@ $db->db_connection->query('ALTER TABLE `visit`
 $db->db_connection->query('ALTER TABLE `website`
   ADD PRIMARY KEY (`id`);
 ');
+$db->db_connection->query("ALTER TABLE `orders` CHANGE `status` `status` VARCHAR(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT 'draft, completed, canceled, progress, deactivated';");
+
 $db->db_connection->query('ALTER TABLE `category`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=76;');
 $db->db_connection->query('ALTER TABLE `email`
@@ -325,6 +328,9 @@ $db->db_connection->query('ALTER TABLE `visit`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=161;');
 $db->db_connection->query('ALTER TABLE `website`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;');
+$db->db_connection->query("ALTER TABLE `user` 
+  ADD `title` VARCHAR(255) NULL AFTER `l_name`, ADD `description` TEXT NULL AFTER `title`;");
+$db->db_connection->query("ALTER TABLE `user` ADD `profile_image` VARCHAR(255) NULL AFTER `token`;");
 
 for ($i = 0; $i < 40; $i++) {
     $fakeFirstName = $faker->firstName();
