@@ -332,13 +332,13 @@ $db->db_connection->query("ALTER TABLE `user`
   ADD `title` VARCHAR(255) NULL AFTER `l_name`, ADD `description` TEXT NULL AFTER `title`;");
 $db->db_connection->query("ALTER TABLE `user` ADD `profile_image` VARCHAR(255) NULL AFTER `token`;");
 
-for ($i = 0; $i < 40; $i++) {
+for ($i = 1; $i < 41; $i++) {
     $fakeFirstName = $faker->firstName();
     $fakeAddress = $faker->address;
     $fakeEmail = $faker->email;
-    $stmt = $db->db_connection->prepare("INSERT INTO user (`f_name`, `l_name`, `email`, `password`, `lang_id`)
-     VALUE (?, ?, ?, ?, ?)");
-    $stmt->execute([$fakeFirstName, $faker->lastName, $fakeEmail, password_hash("secret", PASSWORD_DEFAULT), 1]);
+    $stmt = $db->db_connection->prepare("INSERT INTO user (`id`,`f_name`, `l_name`, `email`, `password`, `lang_id`)
+     VALUE (?, ?, ?, ?, ?, ?)");
+    $stmt->execute([$i, $fakeFirstName, $faker->lastName, $fakeEmail, password_hash("secret", PASSWORD_DEFAULT), 1]);
 }
 for ($i = 0; $i < 40; $i++) {
     $roleId = rand(2, 4);
@@ -367,10 +367,10 @@ for ($i = 0; $i < 90; $i++) {
         $price, $user_id, 'writting', $faker->randomElement($lavel), $style, '1', time()
     ]);
 }
-for ($i = 0; $i < 4; $i++) {
-    $role = ['root', 'admin', 'writer', 'student'];
-    $stmt = $db->db_connection->prepare("INSERT INTO roles (`name`) VALUE (?)");
-    $stmt->execute([$role[$i]]);
+for ($i = 1; $i < 5; $i++) {
+    $role = ['', 'root', 'admin', 'writer', 'student'];
+    $stmt = $db->db_connection->prepare("INSERT INTO roles (`id`, `name`) VALUE (?,?)");
+    $stmt->execute([$i, $role[$i]]);
 }
 for ($i = 0; $i < 15; $i++) {
     $category = [
