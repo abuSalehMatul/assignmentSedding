@@ -332,6 +332,12 @@ $db->db_connection->query("ALTER TABLE `user`
   ADD `title` VARCHAR(255) NULL AFTER `l_name`, ADD `description` TEXT NULL AFTER `title`;");
 $db->db_connection->query("ALTER TABLE `user` ADD `profile_image` VARCHAR(255) NULL AFTER `token`;");
 
+$db->db_connection->query("ALTER TABLE `order_request` ADD `language` VARCHAR(190) NULL DEFAULT NULL AFTER `source`;");
+$db->db_connection->query("ALTER TABLE `order_request` ADD `price_after_service_charge` DOUBLE NOT NULL DEFAULT '0' AFTER `language`;");
+$db->db_connection->query("ALTER TABLE `order_request` CHANGE `price` `price` DOUBLE NULL DEFAULT '0';");
+$db->db_connection->query("ALTER TABLE `order_request` CHANGE `status` `status` VARCHAR(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT 'draft, completed, canceled, progress, deactivated';");
+$db->db_connection->query("ALTER TABLE `order_request` ADD `topic` VARCHAR(355) NULL AFTER `page_number`, ADD `subject` VARCHAR(190) NULL AFTER `topic`;");
+$db->db_connection->query("ALTER TABLE `user` ADD `status` VARCHAR(25) NULL AFTER `role`;");
 for ($i = 1; $i < 41; $i++) {
     $fakeFirstName = $faker->firstName();
     $fakeAddress = $faker->address;
