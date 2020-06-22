@@ -240,6 +240,82 @@ $db->db_connection->query('CREATE TABLE `website` (
     `font` varchar(255) NOT NULL
   ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;');
 
+  $db->db_connection->query("CREATE TABLE `subject` (
+    `id` int(11) NOT NULL,
+    `name` varchar(255) NOT NULL
+  ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;");
+
+$db->db_connection->query("CREATE TABLE `type` (
+  `id` int(11) NOT NULL,
+  `name` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;");
+
+$db->db_connection->query("CREATE TABLE `writer_subject` (
+  `id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `subject_id` int(11) NOT NULL,
+  `priority` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;");
+
+$db->db_connection->query("CREATE TABLE `writer_service` (
+  `id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `service_id` int(11) NOT NULL,
+  `priority` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;");
+
+$db->db_connection->query("CREATE TABLE `service` (
+  `id` int(11) NOT NULL,
+  `name` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;");
+
+
+$db->db_connection->query("CREATE TABLE `writer_type` (
+  `id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `type_id` int(11) NOT NULL,
+  `priority` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;");
+
+$db->db_connection->query("ALTER TABLE `service`
+ADD PRIMARY KEY (`id`);");
+
+
+$db->db_connection->query("ALTER TABLE `service`
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;");
+
+
+$db->db_connection->query("ALTER TABLE `writer_service`
+ADD PRIMARY KEY (`id`);");
+
+$db->db_connection->query("ALTER TABLE `writer_service`
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;");
+
+$db->db_connection->query("ALTER TABLE `writer_subject`
+ADD PRIMARY KEY (`id`);");
+
+$db->db_connection->query("ALTER TABLE `writer_subject`
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;");
+
+
+$db->db_connection->query("ALTER TABLE `writer_type`
+ADD PRIMARY KEY (`id`);");
+
+$db->db_connection->query("ALTER TABLE `writer_type`
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;");
+
+$db->db_connection->query("ALTER TABLE `type`
+ADD PRIMARY KEY (`id`);");
+
+$db->db_connection->query("ALTER TABLE `type`
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;");
+
+$db->db_connection->query("ALTER TABLE `subject`
+ADD PRIMARY KEY (`id`);");
+
+$db->db_connection->query("ALTER TABLE `subject`
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;");
+
 $db->db_connection->query('ALTER TABLE `category`
   ADD PRIMARY KEY (`id`);
 ');
@@ -291,9 +367,9 @@ $db->db_connection->query('ALTER TABLE `website`
 $db->db_connection->query("ALTER TABLE `orders` CHANGE `status` `status` VARCHAR(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT 'draft, completed, canceled, progress, deactivated';");
 
 $db->db_connection->query('ALTER TABLE `category`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=76;');
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;');
 $db->db_connection->query('ALTER TABLE `email`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=221;');
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;');
 $db->db_connection->query('ALTER TABLE `essay`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;');
 $db->db_connection->query('ALTER TABLE `language`
@@ -305,7 +381,7 @@ $db->db_connection->query('ALTER TABLE `media`
 $db->db_connection->query('ALTER TABLE `message`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;');
 $db->db_connection->query('ALTER TABLE `offer`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=383;');
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;');
 $db->db_connection->query('ALTER TABLE `orders`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;');
 $db->db_connection->query('ALTER TABLE `order_request`
@@ -315,17 +391,17 @@ $db->db_connection->query('ALTER TABLE `payment`
 $db->db_connection->query('ALTER TABLE `rating`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;');
 $db->db_connection->query('ALTER TABLE `roles`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;');
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;');
 $db->db_connection->query('ALTER TABLE `submission`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;');
 $db->db_connection->query('ALTER TABLE `sub_category`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;');
 $db->db_connection->query('ALTER TABLE `user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=361;');
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;');
 $db->db_connection->query('ALTER TABLE `user_role`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=281;');
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;');
 $db->db_connection->query('ALTER TABLE `visit`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=161;');
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;');
 $db->db_connection->query('ALTER TABLE `website`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;');
 $db->db_connection->query("ALTER TABLE `user` 
@@ -338,6 +414,64 @@ $db->db_connection->query("ALTER TABLE `order_request` CHANGE `price` `price` DO
 $db->db_connection->query("ALTER TABLE `order_request` CHANGE `status` `status` VARCHAR(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT 'draft, completed, canceled, progress, deactivated';");
 $db->db_connection->query("ALTER TABLE `order_request` ADD `topic` VARCHAR(355) NULL AFTER `page_number`, ADD `subject` VARCHAR(190) NULL AFTER `topic`;");
 $db->db_connection->query("ALTER TABLE `user` ADD `status` VARCHAR(25) NULL AFTER `role`;");
+$db->db_connection->query("ALTER TABLE `website` ADD `email` VARCHAR(255) NULL AFTER `font`, ADD `phone` VARCHAR(255) NULL AFTER `email`, ADD `facebook` VARCHAR(255) NULL AFTER `phone`, ADD `twitter` VARCHAR(255) NULL AFTER `facebook`, ADD `instagram` VARCHAR(255) NULL AFTER `twitter`, ADD `linkedin` VARCHAR(255) NULL AFTER `instagram`;");
+
+
+
+$db->db_connection->query("INSERT INTO `subject` (`id`, `name`) VALUES
+(1, 'Aviation'),
+(2, 'Art'),
+(3, 'Architecture'),
+(4, 'Business'),
+(5, 'Management'),
+(6, 'Computer Science'),
+(7, 'Economics'),
+(8, 'Engineering'),
+(9, 'English'),
+(10, 'Literature'),
+(11, 'Health Care'),
+(12, 'Life Science'),
+(13, 'Sport'),
+(14, 'History'),
+(15, 'Humanities'),
+(16, 'Law'),
+(17, 'Marketing'),
+(18, 'Mathematics'),
+(19, 'Statistics'),
+(20, 'Science'),
+(21, 'Philosophy'),
+(22, 'Political Science'),
+(23, 'Psychology'),
+(24, 'Theology'),
+(25, 'Ethics'),
+(26, 'Social Science'),
+(27, 'History'),
+(28, 'Geography'),
+(29, 'Hospitality'),
+(30, 'Other');");
+
+
+$db->db_connection->query("INSERT INTO `type` (`id`, `name`) VALUES
+(1, 'Essay'),
+(2, 'Article Review'),
+(3, 'Book Review'),
+(4, 'Business Plan'),
+(5, 'Case Study'),
+(6, 'Creative Writing '),
+(7, 'Literature Review'),
+(8, 'Assignment'),
+(9, 'Presentation'),
+(10, 'Report'),
+(11, 'Thesis paper'),
+(12, 'Home Work');");
+
+
+$db->db_connection->query("INSERT INTO `service` (`id`, `name`) VALUES
+(1, 'Writing'),
+(2, 'Editing'),
+(3, 'Re Writing'),
+(4, 'Presentation');");
+
 for ($i = 1; $i < 41; $i++) {
     $fakeFirstName = $faker->firstName();
     $fakeAddress = $faker->address;
