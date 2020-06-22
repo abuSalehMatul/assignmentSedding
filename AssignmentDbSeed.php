@@ -424,13 +424,13 @@ $db->db_connection->query("INSERT INTO `subject` (`id`, `name`) VALUES
 (3, 'Architecture'),
 (4, 'Business'),
 (5, 'Management'),
-(6, 'Computer Science'),
+(6, 'Computer_Science'),
 (7, 'Economics'),
 (8, 'Engineering'),
 (9, 'English'),
 (10, 'Literature'),
-(11, 'Health Care'),
-(12, 'Life Science'),
+(11, 'Health_Care'),
+(12, 'Life_Science'),
 (13, 'Sport'),
 (14, 'History'),
 (15, 'Humanities'),
@@ -440,11 +440,11 @@ $db->db_connection->query("INSERT INTO `subject` (`id`, `name`) VALUES
 (19, 'Statistics'),
 (20, 'Science'),
 (21, 'Philosophy'),
-(22, 'Political Science'),
+(22, 'Political_Science'),
 (23, 'Psychology'),
 (24, 'Theology'),
 (25, 'Ethics'),
-(26, 'Social Science'),
+(26, 'Social_Science'),
 (27, 'History'),
 (28, 'Geography'),
 (29, 'Hospitality'),
@@ -453,23 +453,23 @@ $db->db_connection->query("INSERT INTO `subject` (`id`, `name`) VALUES
 
 $db->db_connection->query("INSERT INTO `type` (`id`, `name`) VALUES
 (1, 'Essay'),
-(2, 'Article Review'),
-(3, 'Book Review'),
-(4, 'Business Plan'),
-(5, 'Case Study'),
-(6, 'Creative Writing '),
-(7, 'Literature Review'),
+(2, 'Article_Review'),
+(3, 'Book_Review'),
+(4, 'Business_Plan'),
+(5, 'Case_Study'),
+(6, 'Creative_Writing'),
+(7, 'Literature_Review'),
 (8, 'Assignment'),
 (9, 'Presentation'),
 (10, 'Report'),
-(11, 'Thesis paper'),
-(12, 'Home Work');");
+(11, 'Thesis_paper'),
+(12, 'Home_Work');");
 
 
 $db->db_connection->query("INSERT INTO `service` (`id`, `name`) VALUES
 (1, 'Writing'),
 (2, 'Editing'),
-(3, 'Re Writing'),
+(3, 'Re_Writing'),
 (4, 'Presentation');");
 
 for ($i = 1; $i < 41; $i++) {
